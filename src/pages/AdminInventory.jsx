@@ -28,6 +28,10 @@ export default function AdminInventory() {
 
   const confirmDelete = async () => {
     await deleteItem(selectedId);
+    const storedFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+    const updatedFavs = storedFavs.filter((fav) => fav.id !== selectedId);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavs));
+
     setModalOpen(false);
     loadData();
   };
